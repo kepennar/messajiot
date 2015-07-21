@@ -1,0 +1,7 @@
+{
+  "app": {
+    "name": "static-messages"
+  },
+  "port": 3000,
+  "db": "mongodb://<login>:<password>@host:port/db-name"
+}

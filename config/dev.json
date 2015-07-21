@@ -1,0 +1,3 @@
+{
+  "db": "mongodb://static-message:static-message@ds033459.mongolab.com:33459/static-message"
+}
