@@ -1,17 +1,22 @@
+var Promise = require('bluebird');
+
 var router = require('express').Router();
 var Message = require('mongoose').model('Message');
 
+Promise.promisifyAll(Message);
+Promise.promisifyAll(Message.prototype);
+
 router.get('/', function (req, res, next) {
-  Message.find(function (err, messages) {
-    if (err) {
-      return next(err)
-    };
+  Message.find()
+  .then(function(messages) {
     res.render('index', {
       title: 'A message',
       messages: messages
     });
-  });
+  })
+  .catch(next);
 });
+
 module.exports = {
   name: 'Home',
   contextPath: '/',
