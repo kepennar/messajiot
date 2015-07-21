@@ -1,21 +1,24 @@
+var Promise = require('bluebird');
 var router = require('express').Router();
 var Message = require('mongoose').model('Message');
 
+Promise.promisifyAll(Message);
+Promise.promisifyAll(Message.prototype);
+
 router.get('/', function (req, res, next) {
-  Message.find(function (err, messages) {
-    if (err) {
-      return next(err)
-    };
+  Message.find()
+  .then(function(messages) {
     res.json(messages);
-  });
+  })
+  .catch(next);
 });
+
 router.post('/', function (req, res, next) {
-  Message.create({title: req.body.title, text: req.body.message}, function (err, message) {
-    if (err) {
-      return next(err)
-    };
+  Message.createAsync({title: req.body.title, text: req.body.message})
+  .then(function (message) {
     res.send(201, message);
-  });
+  })
+  .catch(next);
 });
 
 module.exports = {

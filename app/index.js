@@ -20,9 +20,9 @@ app.engine('swig', swig.renderFile);
 app.set('views', './app/views');
 app.set('view engine', 'swig');
 
-var env = process.env.NODE_ENV || 'development';
+var env = process.env.NODE_ENV || 'dev';
 app.locals.ENV = env;
-app.locals.ENV_DEVELOPMENT = env == 'development';
+app.locals.ENV_DEVELOPMENT = env == 'dev';
 
 app.use(favicon('public/img/favicon.ico'));
 app.use(morgan('dev', {
@@ -43,7 +43,18 @@ app.use(function (req, res, next) {
   next(err);
 });
 
-if (app.get('env') === 'development') {
+if (app.get('env') === 'dev') {
+  app.use(function (err, req, res, next) {
+    if (req.url.indexOf('/api/') >= 0) {
+      res.status(500).send({
+        message: err.message,
+        error: err
+      });
+    } else {
+      next(err);
+    }
+  });
+
   app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
@@ -53,6 +64,16 @@ if (app.get('env') === 'development') {
     });
   });
 }
+
+app.use(function (err, req, res, next) {
+  if (req.url.indexOf('/api/') >= 0) {
+    res.status(500).send({
+      message: err.message
+    });
+  } else {
+    next(err);
+  }
+});
 
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);
