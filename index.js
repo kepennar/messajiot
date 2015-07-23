@@ -5,6 +5,7 @@ var config = require('config');
 var glob = require('glob');
 var mongoose = require('mongoose');
 var logger = rqr('app/components/logger').logger;
+var realtime = rqr('app/components/realtime')
 
 mongoose.connect(config.db);
 var db = mongoose.connection;
@@ -17,6 +18,8 @@ models.forEach(function (model) {
   require(model);
 });
 var app = rqr('app');
+
+
 var server = app.listen(config.port, function() {
   var host = server.address().address;
   var port = server.address().port;
@@ -24,4 +27,5 @@ var server = app.listen(config.port, function() {
   logger.debug('App listening at http://%s:%s', host, port);
 
 });
-
+// Initialize realtime component
+realtime(server);

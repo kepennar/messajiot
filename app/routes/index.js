@@ -7,7 +7,6 @@ var colors = require('colors');
 var logger = rqr('app/components/logger').logger;
 
 var controllers = [];
-controllers.push('app/routes/home');
 controllers.push('app/routes/api/messages');
 
 controllers.forEach(function (controllerPath) {

@@ -1,6 +1,9 @@
+var rqr = require('rqr');
 var Promise = require('bluebird');
 var router = require('express').Router();
 var Message = require('mongoose').model('Message');
+var HandlersManager = rqr('app/components/handlers-manager');
+
 
 Promise.promisifyAll(Message);
 Promise.promisifyAll(Message.prototype);
@@ -16,6 +19,7 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
   Message.createAsync({title: req.body.title, text: req.body.message})
   .then(function (message) {
+    HandlersManager.global.handle('message:created', message);
     res.status(201).send(message);
   })
   .catch(next);
