@@ -16,7 +16,16 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
   Message.createAsync({title: req.body.title, text: req.body.message})
   .then(function (message) {
-    res.send(201, message);
+    res.status(201).send(message);
+  })
+  .catch(next);
+});
+
+router.delete('/', function(req, res, next) {
+  Message.remove()
+  .then(function (response) {
+    console.log(response.result);
+    res.json({nbItemsDeleted: response.result.n});
   })
   .catch(next);
 });

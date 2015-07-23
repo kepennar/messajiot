@@ -1,35 +1,12 @@
 var gulp = require('gulp'),
-  nodemon = require('gulp-nodemon'),
-  plumber = require('gulp-plumber'),
-  livereload = require('gulp-livereload'),
-  sass = require('gulp-sass');
-
-gulp.task('sass', function () {
-  gulp.src('./public/css/*.scss')
-    .pipe(plumber())
-    .pipe(sass())
-    .pipe(gulp.dest('./public/css'))
-    .pipe(livereload());
-});
-
-gulp.task('watch', function() {
-  gulp.watch('./public/css/*.scss', ['sass']);
-});
+  nodemon = require('gulp-nodemon');
 
 gulp.task('develop', function () {
-  livereload.listen();
   nodemon({
-    script: 'index.js',
-    ext: 'js coffee swig',
-  }).on('restart', function () {
-    setTimeout(function () {
-      livereload.changed(__dirname);
-    }, 500);
+    script: 'index.js'
   });
 });
 
 gulp.task('default', [
-  'sass',
   'develop',
-  'watch'
 ]);

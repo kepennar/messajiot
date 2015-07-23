@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
   Message.find()
   .then(function(messages) {
     res.render('index', {
-      title: 'A message',
+      title: 'Message',
       messages: messages
     });
   })

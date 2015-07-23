@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var MessageSchema = new Schema({
   title: String,
   text: String,
-  status: String
+  status: {type: String, default: 'initialized'}
 });
 
 MessageSchema.virtual('date')
