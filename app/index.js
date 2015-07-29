@@ -1,8 +1,6 @@
 var rqr = require('rqr');
 
 var express = require('express');
-var glob = require('glob');
-var config = require('config');
 var loggerStream = rqr('app/components/logger').stream;
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
