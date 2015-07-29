@@ -6,9 +6,8 @@ var logger = rqr('app/components/logger').logger;
 module.exports = function(app) {
   var sse = new SSE(app);
   sse.on('connection', function(sseClient) {
-    logger.debug('[SSE] Client connected');
-    HandlersManager.global.addHandlers('message:created', function(message) {
-      sseClient.send('Created: ' + JSON.stringify(message));
+    HandlersManager.global.addHandlers('messages', function(event) {
+      sseClient.send(JSON.stringify(event));
     });
   });
 };

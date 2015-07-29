@@ -9,16 +9,15 @@ var realtime = rqr('app/components/realtime')
 
 mongoose.connect(config.db);
 var db = mongoose.connection;
-db.on('error', function () {
+db.on('error', function() {
   throw new Error('unable to connect to database at ' + config.db);
 });
 
 var models = glob.sync('./app/models/*.js');
-models.forEach(function (model) {
+models.forEach(function(model) {
   require(model);
 });
 var app = rqr('app');
-
 
 var server = app.listen(config.port, function() {
   var host = server.address().address;

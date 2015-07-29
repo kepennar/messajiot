@@ -20,22 +20,20 @@ app.locals.ENV_DEVELOPMENT = env == 'dev';
 app.use(morgan('dev', {
   'stream': loggerStream
 }));
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
 app.use(compress());
 app.use(methodOverride());
-app.use(routes)
+app.use(routes);
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 if (app.get('env') === 'dev') {
-  app.use(function (err, req, res, next) {
+  app.use(function(err, req, res, next) {
     if (req.url.indexOf('/api/') >= 0) {
       res.status(500).send({
         message: err.message,
@@ -46,7 +44,7 @@ if (app.get('env') === 'dev') {
     }
   });
 
-  app.use(function (err, req, res, next) {
+  app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
@@ -56,7 +54,7 @@ if (app.get('env') === 'dev') {
   });
 }
 
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
   if (req.url.indexOf('/api/') >= 0) {
     res.status(500).send({
       message: err.message
@@ -66,7 +64,7 @@ app.use(function (err, req, res, next) {
   }
 });
 
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
