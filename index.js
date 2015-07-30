@@ -8,7 +8,6 @@ var logger = rqr('app/components/logger').logger;
 var realtime = rqr('app/components/realtime');
 var messagesList = rqr('app/components/messages-queue');
 
-
 /* *** MongoDB connection *** */
 var mongoUri = process.env.MONGOLAB_URI || config.db.url;
 mongoose.connect(mongoUri);
