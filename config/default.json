@@ -7,9 +7,6 @@
   	"url" : "mongodb://<login>:<password>@host:port/db-name"
   },
   "amqp" : {
-  	"host": "<host>",
-    "vhost": "<vhost>",
-  	"login": "<login>",
-  	"password": "<password>"
+  	"url": "amqp://<login>:<password>@<host>/<vhost>"
   }
 }
