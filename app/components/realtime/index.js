@@ -4,7 +4,7 @@ var HandlersManager = rqr('app/components/handlers-manager');
 var logger = rqr('app/components/logger').logger;
 
 module.exports = function(app) {
-  var sse = new SSE(app);
+  var sse = new SSE(app, {CORS: true});
   sse.on('connection', function(sseClient) {
     HandlersManager.global.addHandlers('messages', function(event) {
       sseClient.send(JSON.stringify(event));
