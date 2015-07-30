@@ -1,7 +1,15 @@
 {
   "app": {
-    "name": "static-messages"
+    "name": "static-messages",
+    "port": 8080
   },
-  "port": 3000,
-  "db": "mongodb://<login>:<password>@host:port/db-name"
+  "db": {
+  	"url" : "mongodb://<login>:<password>@host:port/db-name"
+  },
+  "amqp" : {
+  	"host": "<host>",
+    "vhost": "<vhost>",
+  	"login": "<login>",
+  	"password": "<password>"
+  }
 }

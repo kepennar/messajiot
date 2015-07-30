@@ -4,4 +4,5 @@ bower_components/
 .tmp/
 dist/
 /.project
+config/dev.json
 
