@@ -20,7 +20,8 @@ models.forEach(function(model) {
 });
 var app = rqr('app');
 
-var server = app.listen(config.app.port, function() {
+var port = process.env.PORT || config.app.port;
+var server = app.listen(port, function() {
   var host = server.address().address;
   var port = server.address().port;
 
