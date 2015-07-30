@@ -7,7 +7,7 @@ var amqpUrl = process.env.CLOUDAMQP_URL || amqpConfig.url;
 var logger = rqr('app/components/logger').logger;
 var HandlersManager = rqr('app/components/handlers-manager');
 
-logger.debug('[AMQP] Attempt to conenct to', amqpConfig.host);
+logger.debug('[AMQP] Attempt to connect to', amqpUrl);
 
 var connection = amqp.createConnection({url: amqpUrl});
 

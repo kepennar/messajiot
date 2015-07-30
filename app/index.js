@@ -16,7 +16,7 @@ var env = process.env.NODE_ENV || 'dev';
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env == 'dev';
 
-app.use(cors);
+app.use(cors());
 app.use(morgan('dev', {
   'stream': loggerStream
 }));
