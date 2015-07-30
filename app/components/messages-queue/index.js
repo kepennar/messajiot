@@ -2,12 +2,14 @@ var rqr = require('rqr');
 var amqp = require('amqp');
 var amqpConfig = require('config').amqp;
 
+var amqpUrl = process.env.CLOUDAMQP_URL || amqpConfig.url;
+
 var logger = rqr('app/components/logger').logger;
 var HandlersManager = rqr('app/components/handlers-manager');
 
 logger.debug('[AMQP] Attempt to conenct to', amqpConfig.host);
 
-var connection = amqp.createConnection(amqpConfig);
+var connection = amqp.createConnection({url: amqpUrl});
 
 // Wait for connection to become established.
 connection.on('ready', function() {

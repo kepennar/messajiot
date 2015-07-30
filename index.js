@@ -8,7 +8,10 @@ var logger = rqr('app/components/logger').logger;
 var realtime = rqr('app/components/realtime');
 var messagesList = rqr('app/components/messages-queue');
 
-mongoose.connect(config.db.url);
+
+/* *** MongoDB connection *** */
+var mongoUri = process.env.MONGOLAB_URI || config.db.url;
+mongoose.connect(mongoUri);
 var db = mongoose.connection;
 db.on('error', function() {
   throw new Error('unable to connect to database at ' + config.db.url);
